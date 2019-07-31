@@ -37,10 +37,9 @@ saidaL = []
 for i in range(len(lista)):
   saidaB.append(timeit.timeit("BSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,BSort",number=1))
 
-desenhaGrafico(lista,saidaB,nam="Tempo Bubble")
+desenhaGrafico(lista,saidaB,nam="Tempo Bubble",yl="Tempo")
 
 for i in range(len(lista)):
-
   saidaL.append(BSort(geraLista(lista[i])))
 
-desenhaGrafico(lista,saidaL,nam="cont")
+desenhaGrafico(lista,saidaL,nam="Quantidade de Swaps",yl="Swap")
