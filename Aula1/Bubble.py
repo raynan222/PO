@@ -42,4 +42,4 @@ desenhaGrafico(lista,saidaB,nam="Tempo Bubble",yl="Tempo")
 for i in range(len(lista)):
   saidaL.append(BSort(geraLista(lista[i])))
 
-desenhaGrafico(lista,saidaL,nam="Quantidade de Swaps",yl="Swap")
+desenhaGrafico(lista,saidaL,nam="Quantidade de Swaps",yl="Swaps")
