@@ -37,7 +37,7 @@ saidaL = []
 for i in range(len(lista)):
   saidaB.append(timeit.timeit("BSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,BSort",number=1))
 
-desenhaGrafico(lista,saidaB,nam="tempo")
+desenhaGrafico(lista,saidaB,nam="Tempo Bubble")
 
 for i in range(len(lista)):
 
