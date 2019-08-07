@@ -2,6 +2,18 @@ import timeit
 from random import randint
 import matplotlib.pyplot as plt
 
+"""
+
+Utilizar count para contagem que o professor desejar
+Utilizar saidaSwap.append(count)para armazenar a contagem do plot.
+Utilizar return count no fim das funções de ordenação
+
+desenhaGrafico(lista,saidaS,saidaSI,nam="Tempo",yl="Tempo")
+desenhaGrafico(lista,saidaSwaps[0:4],saidaSwaps[4:],nam="Swaps",yl="Swaps")
+
+"""
+
+"""FUNÇÕES DE GERAÇÃO DE LISTA"""
 def geraLista(tam):
     lista = []
     while len(lista) < tam:
@@ -9,7 +21,26 @@ def geraLista(tam):
         if n not in lista: lista.append(n)
     return lista
 
-def desenhaGrafico(x,BSort,ISort,SSort,SHSort,MSort,QSort,RSort,HSort,xl = "Entradas", yl = "Saídas"):
+def geraListaI(tam):
+    lista =[]
+    while tam:
+      lista.append(tam)
+      tam-=1
+    return lista
+
+def geraListaO(tam):
+    lista =[]
+    aux=1
+    while aux<tam+1:
+      lista.append(aux)
+      aux+=1
+    return lista
+"""FUNÇÕES DE GERAÇÃO DE LISTA"""
+
+saidaSwaps = []
+
+""""FUNÇÃO PARA DESENHAR GRAFICO"""
+def desenhaGrafico(x,BSort,ISort,SSort,SHSort,MSort,QSort,RSort,HSort, xLabel = "Entradas", yLabel = "Saídas", nam="img"):
     fig = plt.figure(figsize=(10, 13))
     ax = fig.add_subplot(111)
     ax.plot(x,BSort, label = "Bubble Sort")
@@ -21,10 +52,12 @@ def desenhaGrafico(x,BSort,ISort,SSort,SHSort,MSort,QSort,RSort,HSort,xl = "Entr
     ax.plot(x,RSort, label = "Radix Sort")
     ax.plot(x,HSort, label = "Heap Sort")
     ax.legend(bbox_to_anchor=(1, 1),bbox_transform=plt.gcf().transFigure)
-    plt.ylabel(yl)
-    plt.xlabel(xl)
-    plt.savefig("img")
+    plt.ylabel(yLabel)
+    plt.xlabel(xLabel)
+    plt.savefig(nam)
+""""FUNÇÃO PARA DESENHAR GRAFICO"""
 
+""""FUNÇÕES PARA ORDENAÇÃO"""
 def BSort(lista):
   for i in range(len(lista)):
     for j in range(0, len(lista)-i-1):
@@ -162,6 +195,8 @@ def HSort(lista):
   for i in range(n-1, 0, -1): 
     lista[i], lista[0] = lista[0], lista[i]
     heap(lista, i, 0) 
+""""FUNÇÃO PARA DESENHAR GRAFICO"""
+
 
 lista = [1,10,100,1000]
 saidaB = []
@@ -174,21 +209,21 @@ saidaR = []
 saidaH = []
 
 
-list2=geraLista(7)
-print(list2)
-HSort(list2)
-print(list2)
-
-
 for i in range(len(lista)):
   saidaB.append(timeit.timeit("BSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,BSort",number=1))
+for i in range(len(lista)):
   saidaI.append(timeit.timeit("ISort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,ISort",number=1))
+for i in range(len(lista)):
   saidaS.append(timeit.timeit("SSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,SSort",number=1))
+for i in range(len(lista)):
   saidaSH.append(timeit.timeit("SHSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,SHSort",number=1))
+for i in range(len(lista)):
   saidaM.append(timeit.timeit("preMerge({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,preMerge",number=1))
+for i in range(len(lista)):
   saidaQ.append(timeit.timeit("preQuick({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,preQuick",number=1))
+for i in range(len(lista)):
   saidaR.append(timeit.timeit("RSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,RSort",number=1))
+for i in range(len(lista)):
   saidaH.append(timeit.timeit("HSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,HSort",number=1))
 
 desenhaGrafico(lista,saidaB,saidaI,saidaS,saidaSH,saidaM,saidaQ,saidaR,saidaH)
-
