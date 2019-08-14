@@ -2,40 +2,12 @@ import timeit
 from random import *
 import matplotlib.pyplot as plt
 
-
-"""
-
-Utilizar count para contagem que o professor desejar
-Utilizar saidaSwap.append(count)para armazenar a contagem do plot.
-Utilizar return count no fim das funções de ordenação
-
-desenhaGrafico(lista,saidaS,saidaSI,nam="Tempo",yl="Tempo")
-desenhaGrafico(lista,saidaSwaps[0:4],saidaSwaps[4:],nam="Swaps",yl="Swaps")
-
-"""
-
 """FUNÇÕES DE GERAÇÃO DE LISTA"""
 def geraLista(tam):
   lista = list(range(1, tam + 1))
   shuffle(lista)
   return lista
-def geraListaI(tam):
-    lista =[]
-    while tam:
-      lista.append(tam)
-      tam-=1
-    return lista
-
-def geraListaO(tam):
-    lista =[]
-    aux=1
-    while aux<tam+1:
-      lista.append(aux)
-      aux+=1
-    return lista
 """FUNÇÕES DE GERAÇÃO DE LISTA"""
-
-saidaSwaps = []
 
 """"FUNÇÃO PARA DESENHAR GRAFICO"""
 def desenhaGrafico(x,MSort, xLabel = "Entradas", yLabel = "Saídas", nam="img"):
@@ -85,8 +57,6 @@ def MSort(lista,es,di):
     merge(lista, es, me, di) 
 def preMerge(lista):
   MSort(lista,0,len(lista)-1)
-
-   #print("Merging ",alist)
 """"FUNÇÃO PARA DESENHAR GRAFICO"""
 
 
@@ -98,4 +68,5 @@ for i in range(len(lista)):
   print("Começando: "+str(lista[i]))
   saidaM.append(timeit.timeit("preMerge({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,preMerge",number=1))
   print("Terminou: "+str(lista[i]))
+  
 desenhaGrafico(lista,saidaM,nam="Tempo")
