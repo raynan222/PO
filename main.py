@@ -1,5 +1,5 @@
 import timeit
-from random import randint
+from random import *
 import matplotlib.pyplot as plt
 
 """
@@ -15,25 +15,16 @@ desenhaGrafico(lista,saidaSwaps[0:4],saidaSwaps[4:],nam="Swaps",yl="Swaps")
 
 """FUNÇÕES DE GERAÇÃO DE LISTA"""
 def geraLista(tam):
-    lista = []
-    while len(lista) < tam:
-        n = randint(1,1*tam)
-        if n not in lista: lista.append(n)
+    lista = list(range(1, tam + 1))
+    shuffle(lista)
     return lista
 
-def geraListaI(tam):
-    lista =[]
-    while tam:
-      lista.append(tam)
-      tam-=1
-    return lista
+def gerlistaaI(tam):
+    lista = list(range(1, tam + 1))
+    return lista[::-1]
 
-def geraListaO(tam):
-    lista =[]
-    aux=1
-    while aux<tam+1:
-      lista.append(aux)
-      aux+=1
+def gerlistaaO(tam):
+    lista = list(range(1, tam + 1))
     return lista
 """FUNÇÕES DE GERAÇÃO DE LISTA"""
 
@@ -210,20 +201,36 @@ saidaH = []
 
 
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaB.append(timeit.timeit("BSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,BSort",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaI.append(timeit.timeit("ISort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,ISort",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaS.append(timeit.timeit("SSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,SSort",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaSH.append(timeit.timeit("SHSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,SHSort",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaM.append(timeit.timeit("preMerge({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,preMerge",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaQ.append(timeit.timeit("preQuick({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,preQuick",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaR.append(timeit.timeit("RSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,RSort",number=1))
+  print("Terminou: "+str(lista[i])
 for i in range(len(lista)):
+  print("Começou: "+str(lista[i])
   saidaH.append(timeit.timeit("HSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,HSort",number=1))
+  print("Terminou: "+str(lista[i])
 
-desenhaGrafico(lista,saidaB,saidaI,saidaS,saidaSH,saidaM,saidaQ,saidaR,saidaH)
+desenhaGrafico(lista,saidaB,saidaI,saidaS,saidaSH,saidaM,saidaQ,saidaR,saidaH,nam="Tempo")
