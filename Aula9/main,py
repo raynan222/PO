@@ -1,0 +1,62 @@
+import timeit
+from random import *
+import matplotlib.pyplot as plt
+
+"""FUNÇÕES DE GERAÇÃO DE LISTA"""
+
+def geraLista(tam):
+    lista = list(range(1, tam + 1))
+    shuffle(lista)
+    return lista
+
+"""FUNÇÕES DE GERAÇÃO DE LISTA"""
+
+
+"""FUNÇÃO PARA DESENHAR GRAFICO"""
+def desenhaGrafico(x,RSort, xLabel = "Entradas", yLabel = "Saídas", nam="img"):
+    fig = plt.figure(figsize=(10, 13))
+    ax = fig.add_subplot(111)
+    ax.plot(x,RSort, label = "Radix Sort")
+    ax.legend(bbox_to_anchor=(1, 1),bbox_transform=plt.gcf().transFigure)
+    plt.ylabel(yLabel)
+    plt.xlabel(xLabel)
+    plt.savefig(nam)
+"""FUNÇÃO PARA DESENHAR GRAFICO"""
+
+
+"""FUNÇÕES PARA ORDENAÇÃO"""
+
+def RSort(lista): 
+  maximo = max(lista) 
+  exp = 1
+  while maximo/exp > 0: 
+    index = len(lista) + 1
+    ocorrencias = [0] * index
+
+    for i in lista:
+        ocorrencias[i] += 1
+
+    k = 0
+
+    for i in range(index):
+        for j in range(ocorrencias[i]):
+            lista[k] = i
+            k += 1
+    exp *= 10
+
+"""FUNÇÕES PARA ORDENAÇÃO"""
+
+
+lista = [100000, 200000, 400000, 500000, 1000000, 2000000]
+saidaR = []
+teste = geraLista(10)
+print(teste)
+RSort(teste)
+print(teste)
+
+for i in range(len(lista)):
+  print("Começou: "+str(lista[i]))
+  saidaR.append(timeit.timeit("RSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,RSort",number=1))
+  print("Terminou: "+str(lista[i]))
+
+desenhaGrafico(lista,saidaR,nam="Tempo")
