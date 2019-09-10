@@ -1,0 +1,51 @@
+import timeit
+from random import *
+import matplotlib.pyplot as plt
+
+"""FUNÇÕES DE GERAÇÃO DE LISTA"""
+def geraLista(tam):
+    lista = list(range(1, tam + 1))
+    shuffle(lista)
+    return lista
+"""FUNÇÕES DE GERAÇÃO DE LISTA"""
+
+"""FUNÇÃO PARA DESENHAR GRAFICO"""
+def desenhaGrafico(x,Gsort, xLabel = "Entradas", yLabel = "Saídas", nam="img"):
+    fig = plt.figure(figsize=(10, 13))
+    ax = fig.add_subplot(111)
+    ax.plot(x,Gsort, label = "Gnome Sort")
+    ax.legend(bbox_to_anchor=(1, 1),bbox_transform=plt.gcf().transFigure)
+    plt.ylabel(yLabel)
+    plt.xlabel(xLabel)
+    plt.savefig(nam)
+"""FUNÇÃO PARA DESENHAR GRAFICO"""
+
+
+
+"""FUNÇÕES PARA ORDENAÇÃO"""
+def GSort(lista):
+    tam = len(lista)
+    index = 0
+    while index < tam:
+        if index == 0:
+            index = index + 1
+        if lista[index] >= lista[index - 1]:
+            index = index + 1
+        else:
+            aux = lista[index]
+            lista[index] = lista[index - 1]
+            lista[index - 1] = aux
+            index = index - 1
+    return lista
+"""FUNÇÕES PARA ORDENAÇÃO"""
+
+
+lista = [100000, 200000, 400000, 500000, 1000000, 2000000]
+saidaG = []
+
+for i in range(len(lista)):
+  print("Começou: "+str(lista[i]))
+  saidaG.append(timeit.timeit("GSort({})".format(geraLista(lista[i])),setup="from __main__ import geraLista,GSort",number=1))
+  print("Terminou: "+str(lista[i]))
+
+desenhaGrafico(foto,saidaG,nam="Tempo")
